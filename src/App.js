@@ -25,6 +25,7 @@ import {
   deselectPlace
 } from './store/actions/index';
 
+
 const AppStack = createStackNavigator({
   Home: HomeScreen
 });
@@ -38,6 +39,7 @@ class App extends React.Component {
 
   placeAddedHandler = placeName => {
     this.props.onAddPlace(placeName);
+    console.log("Place Is added");
     // When we are using store no need to call setState
     // this.setState(prevState => {
     //   return {
