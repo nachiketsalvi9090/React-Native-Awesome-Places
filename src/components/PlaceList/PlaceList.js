@@ -21,8 +21,12 @@ const placeList = props => {
         <ListItem
           placeName={info.item.name}
           placeImage={info.item.image}
+          isFavourite={info.item.isFavourite}
           onItemPress={() => {
             props.onItemSelect(info.item.key);
+          }}
+          onFavoutitePress ={()=>{
+            props.onFavoutitePress(info.item.key)
           }}
         />
       )}

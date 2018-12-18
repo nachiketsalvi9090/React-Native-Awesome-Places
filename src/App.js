@@ -22,7 +22,8 @@ import {
   addPlace,
   deletePlace,
   selectPlace,
-  deselectPlace
+  deselectPlace,
+  manageFavouritePlace
 } from './store/actions/index';
 
 
@@ -40,6 +41,7 @@ class App extends React.Component {
   placeAddedHandler = placeName => {
     this.props.onAddPlace(placeName);
     console.log("Place Is added");
+    console.log(this.props.places)
     // When we are using store no need to call setState
     // this.setState(prevState => {
     //   return {
@@ -94,7 +96,9 @@ class App extends React.Component {
     //   };
     // });
   };
-  
+  onFavoutitePressHandler = key => {
+    this.props.onManageFavouritePlace(key);
+  }
   componentDidCatch(error) {
     Alert.alert('Error', error.stack);
   }
@@ -112,6 +116,7 @@ class App extends React.Component {
           // places={this.state.places} no need to use state when use store
           places={this.props.places}
           onItemSelect={this.onItemSelectHandler}
+          onFavoutitePress={this.onFavoutitePressHandler}
         />
       </View>
     );
@@ -139,7 +144,8 @@ const mapDispatchToProps = dispatch => {
     onAddPlace: name => dispatch(addPlace(name)),
     onDeletePlace: () => dispatch(deletePlace()),
     onSelectPlace: key => dispatch(selectPlace(key)),
-    onDeselectPlace: () => dispatch(deselectPlace())
+    onDeselectPlace: () => dispatch(deselectPlace()),
+    onManageFavouritePlace : key => dispatch(manageFavouritePlace(key))
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -2,7 +2,8 @@ import {
   ADD_PLACE,
   DELETE_PLACE,
   SELECT_PLACE,
-  DESELECT_PLACE
+  DESELECT_PLACE,
+  MANAGE_FAVOURITE_PLACE
 } from '../actions/actionTypes';
 const initiaState = {
   places: [],
@@ -17,6 +18,7 @@ const reducer = (state = initiaState, action) => {
         places: state.places.concat({
           key: Math.random(),
           name: action.placeName,
+          isFavourite: false,
           image: {
             uri:
               'https://upload.wikimedia.org/wikipedia/commons/3/36/Hopetoun_falls.jpg'
@@ -27,9 +29,9 @@ const reducer = (state = initiaState, action) => {
       return {
         ...state,
         places: state.places.filter((place, i) => {
-                return place.key !== state.selectedPlace.key;
-              }),
-              selectedPlace: null
+          return place.key !== state.selectedPlace.key;
+        }),
+        selectedPlace: null
       };
     case SELECT_PLACE:
       return {
@@ -38,12 +40,23 @@ const reducer = (state = initiaState, action) => {
           return place.key === action.placeKey;
         })
       };
-   
+
     case DESELECT_PLACE:
       return {
         ...state,
         selectedPlace: null
       };
+    case MANAGE_FAVOURITE_PLACE:
+      return {
+        ...state,
+        places: state.places.forEach((place, i) => {
+          if (place.key) {
+            alert(place.key)
+            // place.isFavourite = !place.isFavourite;
+          }
+        })
+      };
+
     default:
       return state;
   }

@@ -2,7 +2,8 @@ import {
   ADD_PLACE,
   DELETE_PLACE,
   DESELECT_PLACE,
-  SELECT_PLACE
+  SELECT_PLACE,
+  MANAGE_FAVOURITE_PLACE,
 } from './actionTypes';
 
 export const addPlace = placeName => {
@@ -30,3 +31,10 @@ export const deselectPlace = () => {
     type: DESELECT_PLACE
   };
 };
+
+export const manageFavouritePlace = key => {
+  return {
+    type:MANAGE_FAVOURITE_PLACE,
+    placeKey : key
+  }
+}
