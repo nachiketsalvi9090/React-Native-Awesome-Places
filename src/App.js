@@ -158,12 +158,13 @@ import { Provider } from 'react-redux';
 import AuthScreen from './screens/Auth/Auth';
 import SharePlaceScreen from './screens/SharePlace/SharePlace';
 import FindPlaceScreen from './screens/FindPlace/FindPlace';
+import PlaceDetails from './screens/PlaceDetail/PlaceDetail';
 
 //Import Store
 import configureStore from './store/configureStore';
 
-
 const store = configureStore();
+
 // Register Screens
 Navigation.registerComponent(
   'awesome-places.AuthScreen',
@@ -183,7 +184,12 @@ Navigation.registerComponent(
   store,
   Provider
 );
-
+Navigation.registerComponent(
+  'awesome-places.PlaceDetail',
+  () => PlaceDetails,
+  store,
+  Provider
+);
 
 // Start a App
 Navigation.startSingleScreenApp({
