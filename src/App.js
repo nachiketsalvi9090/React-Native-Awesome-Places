@@ -26,7 +26,6 @@
 //   manageFavouritePlace
 // } from './store/actions/index';
 
-
 // const AppStack = createStackNavigator({
 //   Home: HomeScreen
 // });
@@ -57,7 +56,6 @@
 //     // });
 //   };
 
-  
 //   onItemSelectHandler = key => {
 //     this.props.onSelectPlace(key);
 //     // When we are using store no need to call setState
@@ -150,15 +148,47 @@
 // };
 // export default connect(mapStateToProps, mapDispatchToProps)(App);
 
-import { Navigation } from "react-native-navigation";
-import AuthScreen from './screens/Auth/Auth'
+//import Navigation
+import { Navigation } from 'react-native-navigation';
+
+//TO connect tabs to redux import provider
+import { Provider } from 'react-redux';
+
+//import Screens
+import AuthScreen from './screens/Auth/Auth';
+import SharePlaceScreen from './screens/SharePlace/SharePlace';
+import FindPlaceScreen from './screens/FindPlace/FindPlace';
+
+//Import Store
+import configureStore from './store/configureStore';
+
+
+const store = configureStore();
 // Register Screens
-Navigation.registerComponent("awesome-places.AuthScreen", () => AuthScreen);
+Navigation.registerComponent(
+  'awesome-places.AuthScreen',
+  () => AuthScreen,
+  store,
+  Provider
+);
+Navigation.registerComponent(
+  'awesome-places.SharePlaceScreen',
+  () => SharePlaceScreen,
+  store,
+  Provider
+);
+Navigation.registerComponent(
+  'awesome-places.FindPlaceScreen',
+  () => FindPlaceScreen,
+  store,
+  Provider
+);
+
 
 // Start a App
 Navigation.startSingleScreenApp({
   screen: {
-    screen: "awesome-places.AuthScreen",
-    title: "Login"
+    screen: 'awesome-places.AuthScreen',
+    title: 'Login'
   }
 });
