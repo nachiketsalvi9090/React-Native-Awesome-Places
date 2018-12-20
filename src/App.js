@@ -159,6 +159,7 @@ import AuthScreen from './screens/Auth/Auth';
 import SharePlaceScreen from './screens/SharePlace/SharePlace';
 import FindPlaceScreen from './screens/FindPlace/FindPlace';
 import PlaceDetails from './screens/PlaceDetail/PlaceDetail';
+import SideDrawer from './screens/SideDrawer/SideSrawer';
 
 //Import Store
 import configureStore from './store/configureStore';
@@ -190,6 +191,7 @@ Navigation.registerComponent(
   store,
   Provider
 );
+Navigation.registerComponent('awesome-places.SideDrawer', () => SideDrawer);
 
 // Start a App
 Navigation.startSingleScreenApp({
