@@ -10,12 +10,12 @@ import {
 import { connect } from 'react-redux';
 
 //Import Component Here
-import DefaultInput from '../../components/UI/DefaultInput/DefaultInput';
+import PlaceInput from '../../components/PlaceInput/PlaceInput';
 import MainText from '../../components/UI/MainText/MainText';
 import HeadingText from '../../components/UI/HeadingText/HeadingText';
+import PickImage from '../../components/PickImage/PickImage';
+import PickLocation from '../../components/PickLocation/PickLocation';
 
-// Import Assets
-import imagePlaceHolder from '../../assets/place.jpg'
 //Import action creator
 import { addPlace } from '../../store/actions/index';
 
@@ -24,6 +24,10 @@ class SharePlaceScreen extends Component {
     super(props);
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
   }
+
+  state = {
+    placeName: ''
+  };
 
   onNavigatorEvent = event => {
     if (event.type === 'NavBarButtonPress') {
@@ -35,9 +39,22 @@ class SharePlaceScreen extends Component {
       }
     }
   };
-  onPlaceAddedHandler = placeName => {
-    this.props.onAddPlace(placeName);
+
+  onPlaceAddedHandler = () => {
+    if (this.state.placeName.trim() !== '') {
+      this.props.onAddPlace(this.state.placeName);
+      this.setState({
+        placeName: ''
+      });
+    }
   };
+
+  placeNameChangeHadler = val => {
+    this.setState({
+      placeName: val
+    });
+  };
+
   render() {
     return (
       <ScrollView>
@@ -45,24 +62,18 @@ class SharePlaceScreen extends Component {
           <MainText>
             <HeadingText headingText="Share Place With us!" />
           </MainText>
-          <View style={styles.placeHolder}>
-           <Image source={imagePlaceHolder} style={styles.previewImage}/>
-          </View>
+          <PickImage />
+          <PickLocation />
+          <PlaceInput
+            placeName={this.state.placeName}
+            onChangeText={this.placeNameChangeHadler}
+          />
           <View style={styles.button}>
-            <Button title="Pick Image" />
+            <Button
+              title="Share the place"
+              onPress={this.onPlaceAddedHandler}
+            />
           </View>
-          <View style={styles.placeHolder}>
-            <Text>Map</Text>
-          </View>
-          <View style={styles.button}>
-            <Button title="Locate Me" />
-          </View>
-          <DefaultInput placeholder="Place Name" />
-          <View style={styles.button}>
-            <Button title="Share the place" />
-          </View>
-
-          {/* <PlaceInput onPlaceAdded={this.onPlaceAddedHandler} /> */}
         </View>
       </ScrollView>
     );
@@ -75,17 +86,6 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 8
-  },
-  placeHolder: {
-    borderWidth: 1,
-    borderColor: 'black',
-    backgroundColor: '#eee',
-    width: '80%',
-    height: 180
-  },
-  previewImage:{
-    width: "100%",
-    height:"100%"
   }
 });
 const mapDispatchToProps = dispatch => {
