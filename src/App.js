@@ -159,7 +159,7 @@ import AuthScreen from './screens/Auth/Auth';
 import SharePlaceScreen from './screens/SharePlace/SharePlace';
 import FindPlaceScreen from './screens/FindPlace/FindPlace';
 import PlaceDetails from './screens/PlaceDetail/PlaceDetail';
-import SideDrawer from './screens/SideDrawer/SideSrawer';
+import SideDrawer from './screens/SideDrawer/SideDrawer';
 
 //Import Store
 import configureStore from './store/configureStore';

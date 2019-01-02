@@ -1,22 +1,98 @@
 import React, { Component } from 'react';
-import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
+import { View, StyleSheet, ImageBackground, Dimensions } from 'react-native';
+// Import Assets
+import BackgroundImage from '../../assets/background.jpg';
+// Import Component
 import startTabs from '../MainTabs/startMainTabs';
+import DefaultInput from '../../components/UI/DefaultInput/DefaultInput';
+import HeadingText from '../../components/UI/HeadingText/HeadingText';
+import MainText from '../../components/UI/MainText/MainText';
+import ButtonWithBackground from '../../components/UI/ButtonWithBackground/ButtonWithBackground';
 class AuthScreen extends Component {
+  state = {
+    viewMode: Dimensions.get('window').height > 500 ? 'portrait' : 'landscape'
+  };
+
+  constructor(props) {
+    super(props);
+    Dimensions.addEventListener('change', this.updateStyle);
+  }
+
+  updateStyle = dims => {
+    this.setState({
+      viewMode: dims.window.height > 500 ? 'portrait' : 'landscape'
+    });
+  };
+
   loginHandler = () => {
     startTabs();
   };
+
+  onSwitchToLogin = () => {
+    alert('onSwitchToLogin');
+  };
+
+  componentWillUnmount() {
+    Dimensions.removeEventListener('change', this.updateStyle);
+  }
   render() {
+    let headingText = null;
+    if (this.state.viewMode === 'portrait') {
+      headingText = (
+        <MainText>
+          <HeadingText headingText="Please Login" />
+        </MainText>
+      );
+    }
     return (
-      <View style={styles.container}>
-        <Text>Please Log In</Text>
-        <Button title="Switch to login" />
-        <View style={styles.inputContainer}>
-          <TextInput placeholder="E-mail" style={styles.input} underlineColorAndroid="transparent" />
-          <TextInput placeholder="Password" style={styles.input} underlineColorAndroid="transparent" />
-          <TextInput placeholder="Confirm Password" style={styles.input} underlineColorAndroid="transparent"/>
+      <ImageBackground source={BackgroundImage} style={styles.backgroundImage}>
+        <View style={styles.container}>
+          {headingText}
+          <ButtonWithBackground
+            color="#29aaf4"
+            onPress={() => {
+              alert('Switch To Login Pressed');
+            }}
+          >
+            Switch To Login
+          </ButtonWithBackground>
+          <View style={styles.inputContainer}>
+            <DefaultInput placeholder="E-mail" style={styles.input} />
+            <View
+              style={
+                this.state.viewMode === 'portrait'
+                  ? styles.portraitPasswordContainer
+                  : styles.landscapePasswordContainer
+              }
+            >
+              <View
+                style={
+                  this.state.viewMode === 'portrait'
+                    ? styles.portraitPasswordWrapper
+                    : styles.landscapePasswordWrapper
+                }
+              >
+                <DefaultInput placeholder="Password" style={styles.input} />
+              </View>
+              <View
+                style={
+                  this.state.viewMode === 'portrait'
+                    ? styles.portraitPasswordWrapper
+                    : styles.landscapePasswordWrapper
+                }
+              >
+                <DefaultInput
+                  placeholder="Confirm Password"
+                  style={styles.input}
+                />
+              </View>
+            </View>
+          </View>
+          <ButtonWithBackground color="#29aaf4" onPress={this.loginHandler}>
+            Login
+          </ButtonWithBackground>
         </View>
-        <Button title="Login" onPress={this.loginHandler} />
-      </View>
+      </ImageBackground>
     );
   }
 }
@@ -27,15 +103,30 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  backgroundImage: {
+    width: '100%',
+    flex: 1
+  },
   inputContainer: {
     width: '80%'
   },
   input: {
-    width: '100%',
-    borderWidth: 1,
-    borderColor: '#eee',
-    padding: 5,
-    margin: 8
+    backgroundColor: '#eee',
+    borderColor: '#ddd'
+  },
+  landscapePasswordContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  portraitPasswordContainer: {
+    flexDirection: 'column',
+    justifyContent: 'flex-start'
+  },
+  landscapePasswordWrapper: {
+    width: '45%'
+  },
+  portraitPasswordWrapper: {
+    width: '100%'
   }
 });
 export default AuthScreen;

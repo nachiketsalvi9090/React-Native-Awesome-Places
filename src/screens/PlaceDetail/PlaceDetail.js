@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  PlatformÎ,
+  Platform
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 
@@ -20,18 +28,13 @@ class PlaceDetails extends Component {
           />
           <View style={styles.placeInfoContainer}>
             <Text>{this.props.selectedPlace.name}</Text>
-            <Icon
-              style={styles.favourite}
-              size={25}
-              name={this.props.isFavourite ? 'ios-star' : 'ios-star-outline'}
-            />
           </View>
           <View style={styles.buttonContainer}>
             <TouchableOpacity>
               <View style={styles.viewIcon}>
                 <Icon
                   size={25}
-                  name="ios-trash"
+                  name={Platform.OS === 'android' ? 'md-trash' : 'ios-trash'}
                   color="red"
                   onPress={this.placeDeleteHandler}
                 />
