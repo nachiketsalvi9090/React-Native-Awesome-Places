@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, ImageBackground, Dimensions } from 'react-native';
+import { connect } from 'react-redux';
+
 // Import Assets
 import BackgroundImage from '../../assets/background.jpg';
+
 // Import Component
 import startTabs from '../MainTabs/startMainTabs';
 import DefaultInput from '../../components/UI/DefaultInput/DefaultInput';
@@ -9,6 +12,9 @@ import HeadingText from '../../components/UI/HeadingText/HeadingText';
 import MainText from '../../components/UI/MainText/MainText';
 import ButtonWithBackground from '../../components/UI/ButtonWithBackground/ButtonWithBackground';
 import validate from '../../utility/validation';
+
+//import Actions
+import { tryAuth } from '../../store/actions/index';
 class AuthScreen extends Component {
   state = {
     viewMode: Dimensions.get('window').height > 500 ? 'portrait' : 'landscape',
@@ -18,21 +24,24 @@ class AuthScreen extends Component {
         valid: false,
         validationRule: {
           isEmail: true
-        }
+        },
+        touched: false
       },
       password: {
         value: '',
         valid: false,
         validationRule: {
           minLength: 6
-        }
+        },
+        touched: false
       },
       confirmPassword: {
         value: '',
         valid: false,
         validationRule: {
           equalTo: 'password'
-        }
+        },
+        touched: false
       }
     }
   };
@@ -49,6 +58,11 @@ class AuthScreen extends Component {
   };
 
   loginHandler = () => {
+    const authData = {
+      email: this.state.controls.email.value,
+      password: this.state.controls.password.value
+    };
+    this.props.onLogin(authData);
     startTabs();
   };
 
@@ -94,7 +108,8 @@ class AuthScreen extends Component {
               value,
               prevState.controls[key].validationRule,
               connectedValue
-            )
+            ),
+            touched: true
           }
         }
       };
@@ -131,6 +146,8 @@ class AuthScreen extends Component {
               style={styles.input}
               value={this.state.controls.email.value}
               onChangeText={value => this.updateInputState('email', value)}
+              valid={this.state.controls.email.valid}
+              touched={this.state.controls.email.touched}
             />
             <View
               style={
@@ -153,6 +170,8 @@ class AuthScreen extends Component {
                   onChangeText={value =>
                     this.updateInputState('password', value)
                   }
+                  valid={this.state.controls.password.valid}
+                  touched={this.state.controls.password.touched}
                 />
               </View>
               <View
@@ -169,11 +188,21 @@ class AuthScreen extends Component {
                   onChangeText={value =>
                     this.updateInputState('confirmPassword', value)
                   }
+                  valid={this.state.controls.confirmPassword.valid}
+                  touched={this.state.controls.confirmPassword.touched}
                 />
               </View>
             </View>
           </View>
-          <ButtonWithBackground color="#29aaf4" onPress={this.loginHandler}>
+          <ButtonWithBackground
+            color="#29aaf4"
+            onPress={this.loginHandler}
+            disabled={
+              !this.state.controls.email.valid ||
+              !this.state.controls.password.valid ||
+              !this.state.controls.confirmPassword.valid
+            }
+          >
             Login
           </ButtonWithBackground>
         </View>
@@ -214,4 +243,12 @@ const styles = StyleSheet.create({
     width: '100%'
   }
 });
-export default AuthScreen;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogin: authData => {
+      dispatch(tryAuth(authData));
+    }
+  };
+};
+export default connect(null,mapDispatchToProps)(AuthScreen);
