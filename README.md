@@ -7,6 +7,7 @@ Used to show
 -  how to create tab base app
 -  how to use navigation to push and pop pages.
 -  how to create Side Drawer.
+-  how to made validation on user input form.
 
 # Note
 Use yarn add package_name --save to install all dependencies.
