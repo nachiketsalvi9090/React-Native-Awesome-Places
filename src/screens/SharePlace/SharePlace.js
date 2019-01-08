@@ -19,6 +19,7 @@ import PickLocation from '../../components/PickLocation/PickLocation';
 //Import action creator
 import { addPlace } from '../../store/actions/index';
 
+import validate from '../../utility/validation';
 class SharePlaceScreen extends Component {
   static navigatorStyle = {
     navBarButtonColor: 'orange'
@@ -30,7 +31,16 @@ class SharePlaceScreen extends Component {
   }
 
   state = {
-    placeName: ''
+    controls: {
+      placeName: {
+        value: '',
+        valid: false,
+        touched: false,
+        validationRule: {
+          notEmpty: true
+        }
+      }
+    }
   };
 
   onNavigatorEvent = event => {
@@ -45,17 +55,24 @@ class SharePlaceScreen extends Component {
   };
 
   onPlaceAddedHandler = () => {
-    if (this.state.placeName.trim() !== '') {
-      this.props.onAddPlace(this.state.placeName);
-      this.setState({
-        placeName: ''
-      });
+    if (this.state.controls.placeName.value.trim() !== '') {
+      this.props.onAddPlace(this.state.controls.placeName.value);
     }
   };
 
   placeNameChangeHadler = val => {
-    this.setState({
-      placeName: val
+    this.setState(prevState => {
+      return {
+        controls: {
+          ...prevState.controls,
+          placeName: {
+            ...prevState.controls.placeName,
+            value: val,
+            valid: validate(val, prevState.controls.placeName.validationRule),
+            touched: true
+          }
+        }
+      };
     });
   };
 
@@ -69,13 +86,14 @@ class SharePlaceScreen extends Component {
           <PickImage />
           <PickLocation />
           <PlaceInput
-            placeName={this.state.placeName}
+            placeData={this.state.controls.placeName}
             onChangeText={this.placeNameChangeHadler}
           />
           <View style={styles.button}>
             <Button
               title="Share the place"
               onPress={this.onPlaceAddedHandler}
+              disabled={!this.state.controls.placeName.valid}
             />
           </View>
         </View>

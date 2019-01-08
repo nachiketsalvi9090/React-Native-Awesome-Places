@@ -5,3 +5,5 @@ export {
   deselectPlace,
   manageFavouritePlace
 } from './places';
+
+export {tryAuth} from './auth'

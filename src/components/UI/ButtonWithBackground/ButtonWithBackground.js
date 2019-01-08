@@ -10,10 +10,19 @@ import {
 
 const buttonWithBackground = props => {
   const content = (
-    <View style={[styles.button, { backgroundColor: props.color }]}>
-      <Text>{props.children}</Text>
+    <View
+      style={[
+        styles.button,
+        { backgroundColor: props.color },
+        props.disabled ? styles.disabled : null
+      ]}
+    >
+      <Text style={props.disabled ? styles.disabledText : null}>
+        {props.children}
+      </Text>
     </View>
   );
+
   if (Platform.OS === 'android') {
     return (
       <TouchableNativeFeedback onPress={props.onPress}>
@@ -22,7 +31,9 @@ const buttonWithBackground = props => {
     );
   } else {
     return (
-      <TouchableOpacity onPress={props.onPress}>{content}</TouchableOpacity>
+      <TouchableOpacity onPress={!props.disabled ? props.onPress : null}>
+        {content}
+      </TouchableOpacity>
     );
   }
 };
@@ -33,6 +44,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     borderColor: 'black'
+  },
+  disabled: {
+    backgroundColor: '#aaa',
+    borderColor: '#eee'
+  },
+  disabledText: {
+    color: '#eee'
   }
 });
 export default buttonWithBackground;
