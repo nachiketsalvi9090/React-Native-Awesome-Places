@@ -3,7 +3,7 @@
  *
  * This allows us to hook into the bundle process.
  */
-const blacklist = require('metro/src/blacklist');
+const blacklist = require("metro/src/blacklist");
 
 /*
  * react-native-typescript-transformer allows us to specify the TypeScript
@@ -13,21 +13,21 @@ const blacklist = require('metro/src/blacklist');
  * for development and have a configuration specifically for build as
  * we do here.
  */
-process.env.TSCONFIG_PATH = 'tsconfig.build.json';
+process.env.TSCONFIG_PATH = "tsconfig.build.json";
 
 module.exports = {
   // Use TypeScript with React Native
   getTransformModulePath() {
-    return require.resolve('react-native-typescript-transformer')
+    return require.resolve("react-native-typescript-transformer");
   },
   getSourceExts() {
-    return ['ts', 'tsx'];
+    return ["ts", "tsx"];
   },
 
   // This fixes issues when trying to import some modules such as
   // See: https://github.com/facebook/react-native/issues/17610
   // TODO remove this once the issue is fixed (RN 54?)
   getBlacklistRE() {
-    return blacklist([/react-native\/local-cli\/core\/__fixtures__.*/])
-  },
-}
+    return blacklist([/react-native\/local-cli\/core\/__fixtures__.*/]);
+  }
+};
