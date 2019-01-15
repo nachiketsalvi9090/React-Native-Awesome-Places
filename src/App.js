@@ -149,54 +149,54 @@
 // export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 //import Navigation
-import { Navigation } from 'react-native-navigation';
+import { Navigation } from "react-native-navigation";
 
 //TO connect tabs to redux import provider
-import { Provider } from 'react-redux';
+import { Provider } from "react-redux";
 
 //import Screens
-import AuthScreen from './screens/Auth/Auth';
-import SharePlaceScreen from './screens/SharePlace/SharePlace';
-import FindPlaceScreen from './screens/FindPlace/FindPlace';
-import PlaceDetails from './screens/PlaceDetail/PlaceDetail';
-import SideDrawer from './screens/SideDrawer/SideDrawer';
+import AuthScreen from "./screens/Auth/Auth";
+import SharePlaceScreen from "./screens/SharePlace/SharePlace";
+import FindPlaceScreen from "./screens/FindPlace/FindPlace";
+import PlaceDetails from "./screens/PlaceDetail/PlaceDetail";
+import SideDrawer from "./screens/SideDrawer/SideDrawer";
 
 //Import Store
-import configureStore from './store/configureStore';
+import configureStore from "./store/configureStore";
 
 const store = configureStore();
 
 // Register Screens
 Navigation.registerComponent(
-  'awesome-places.AuthScreen',
+  "awesome-places.AuthScreen",
   () => AuthScreen,
   store,
   Provider
 );
 Navigation.registerComponent(
-  'awesome-places.SharePlaceScreen',
+  "awesome-places.SharePlaceScreen",
   () => SharePlaceScreen,
   store,
   Provider
 );
 Navigation.registerComponent(
-  'awesome-places.FindPlaceScreen',
+  "awesome-places.FindPlaceScreen",
   () => FindPlaceScreen,
   store,
   Provider
 );
 Navigation.registerComponent(
-  'awesome-places.PlaceDetail',
+  "awesome-places.PlaceDetail",
   () => PlaceDetails,
   store,
   Provider
 );
-Navigation.registerComponent('awesome-places.SideDrawer', () => SideDrawer);
+Navigation.registerComponent("awesome-places.SideDrawer", () => SideDrawer);
 
 // Start a App
 Navigation.startSingleScreenApp({
   screen: {
-    screen: 'awesome-places.AuthScreen',
-    title: 'Login'
+    screen: "awesome-places.AuthScreen",
+    title: "Login"
   }
 });

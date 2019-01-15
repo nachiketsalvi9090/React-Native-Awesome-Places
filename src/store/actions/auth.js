@@ -1,4 +1,4 @@
-import { TRY_AUTH } from '../actions/actionTypes';
+import { TRY_AUTH } from "../actions/actionTypes";
 
 export const tryAuth = authData => {
   return {
