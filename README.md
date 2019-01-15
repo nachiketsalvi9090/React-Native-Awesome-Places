@@ -1,4 +1,7 @@
 # React-Native-Awesome-Places
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/436aff7f20f84a28985933d7661592f0)](https://app.codacy.com/app/nachiketsalvi11/React-Native-Awesome-Places?utm_source=github.com&utm_medium=referral&utm_content=nachiketsalvi9090/React-Native-Awesome-Places&utm_campaign=Badge_Grade_Settings)
+
 Used to show 
 -  how to create component 
 -  how to pass data between components 
