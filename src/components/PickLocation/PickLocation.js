@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import React, { Component } from "react";
+import { View, Text, Button, StyleSheet } from "react-native";
 
 class PickLocation extends Component {
   render() {
@@ -18,17 +18,17 @@ class PickLocation extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    alignItems: 'center'
+    width: "100%",
+    alignItems: "center"
   },
   button: {
     margin: 8
   },
   placeHolder: {
     borderWidth: 1,
-    borderColor: 'black',
-    backgroundColor: '#eee',
-    width: '80%',
+    borderColor: "black",
+    backgroundColor: "#eee",
+    width: "80%",
     height: 180
   }
 });

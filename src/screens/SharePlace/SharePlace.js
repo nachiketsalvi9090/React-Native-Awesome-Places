@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   View,
   Button,
@@ -6,23 +6,23 @@ import {
   Image,
   StyleSheet,
   ScrollView
-} from 'react-native';
-import { connect } from 'react-redux';
+} from "react-native";
+import { connect } from "react-redux";
 
 //Import Component Here
-import PlaceInput from '../../components/PlaceInput/PlaceInput';
-import MainText from '../../components/UI/MainText/MainText';
-import HeadingText from '../../components/UI/HeadingText/HeadingText';
-import PickImage from '../../components/PickImage/PickImage';
-import PickLocation from '../../components/PickLocation/PickLocation';
+import PlaceInput from "../../components/PlaceInput/PlaceInput";
+import MainText from "../../components/UI/MainText/MainText";
+import HeadingText from "../../components/UI/HeadingText/HeadingText";
+import PickImage from "../../components/PickImage/PickImage";
+import PickLocation from "../../components/PickLocation/PickLocation";
 
 //Import action creator
-import { addPlace } from '../../store/actions/index';
+import { addPlace } from "../../store/actions/index";
 
-import validate from '../../utility/validation';
+import validate from "../../utility/validation";
 class SharePlaceScreen extends Component {
   static navigatorStyle = {
-    navBarButtonColor: 'orange'
+    navBarButtonColor: "orange"
   };
 
   constructor(props) {
@@ -33,7 +33,7 @@ class SharePlaceScreen extends Component {
   state = {
     controls: {
       placeName: {
-        value: '',
+        value: "",
         valid: false,
         touched: false,
         validationRule: {
@@ -44,18 +44,18 @@ class SharePlaceScreen extends Component {
   };
 
   onNavigatorEvent = event => {
-    if (event.type === 'NavBarButtonPress') {
-      if (event.id === 'sideDrawerToggle') {
+    if (event.type === "NavBarButtonPress") {
+      if (event.id === "sideDrawerToggle") {
         this.props.navigator.toggleDrawer({
           animated: true,
-          side: 'left'
+          side: "left"
         });
       }
     }
   };
 
   onPlaceAddedHandler = () => {
-    if (this.state.controls.placeName.value.trim() !== '') {
+    if (this.state.controls.placeName.value.trim() !== "") {
       this.props.onAddPlace(this.state.controls.placeName.value);
     }
   };
@@ -104,7 +104,7 @@ class SharePlaceScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: "center"
   },
   button: {
     margin: 8

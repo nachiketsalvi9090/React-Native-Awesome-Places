@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import DefaultInput from '../UI/DefaultInput/DefaultInput';
+import React, { Component } from "react";
+import DefaultInput from "../UI/DefaultInput/DefaultInput";
 
 const placeInput = props => (
   <DefaultInput

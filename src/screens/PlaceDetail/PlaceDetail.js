@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   View,
   Image,
@@ -7,12 +7,12 @@ import {
   TouchableOpacity,
   PlatformÎ,
   Platform
-} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { connect } from 'react-redux';
+} from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
+import { connect } from "react-redux";
 
 //Import Action Creator
-import { deletePlace } from '../../store/actions/index';
+import { deletePlace } from "../../store/actions/index";
 class PlaceDetails extends Component {
   placeDeleteHandler = () => {
     this.props.onPlaceDelete(this.props.selectedPlace.key);
@@ -34,7 +34,7 @@ class PlaceDetails extends Component {
               <View style={styles.viewIcon}>
                 <Icon
                   size={25}
-                  name={Platform.OS === 'android' ? 'md-trash' : 'ios-trash'}
+                  name={Platform.OS === "android" ? "md-trash" : "ios-trash"}
                   color="red"
                   onPress={this.placeDeleteHandler}
                 />
@@ -50,28 +50,28 @@ class PlaceDetails extends Component {
 const styles = StyleSheet.create({
   container: {
     margin: 22,
-    flexDirection: 'column'
+    flexDirection: "column"
   },
   buttonContainer: {
-    flexDirection: 'row'
+    flexDirection: "row"
   },
   placeDetailsContainer: {
-    flexDirection: 'column'
+    flexDirection: "column"
   },
   placeImage: {
-    width: '100%',
+    width: "100%",
     height: 150
   },
   placeInfoContainer: {
     padding: 15,
-    display: 'flex',
-    flexDirection: 'row'
+    display: "flex",
+    flexDirection: "row"
   },
   favourite: {
     marginLeft: 15
   },
   viewIcon: {
-    alignItems: 'center'
+    alignItems: "center"
   }
 });
 

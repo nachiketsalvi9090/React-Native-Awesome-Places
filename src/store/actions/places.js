@@ -3,8 +3,8 @@ import {
   DELETE_PLACE,
   DESELECT_PLACE,
   SELECT_PLACE,
-  MANAGE_FAVOURITE_PLACE,
-} from './actionTypes';
+  MANAGE_FAVOURITE_PLACE
+} from "./actionTypes";
 
 export const addPlace = placeName => {
   return {
@@ -13,7 +13,7 @@ export const addPlace = placeName => {
   };
 };
 
-export const deletePlace = (key) => {
+export const deletePlace = key => {
   return {
     type: DELETE_PLACE,
     placeKey: key
@@ -35,7 +35,7 @@ export const deselectPlace = () => {
 
 export const manageFavouritePlace = key => {
   return {
-    type:MANAGE_FAVOURITE_PLACE,
-    placeKey : key
-  }
-}
+    type: MANAGE_FAVOURITE_PLACE,
+    placeKey: key
+  };
+};
