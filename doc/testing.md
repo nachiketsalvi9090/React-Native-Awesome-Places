@@ -19,7 +19,6 @@ something similar, particularly while developing the tests themselves.
 
 You should run `yarn test` before creating a pull request.
 
-Make sure you read and understand the [Mobiquity General Unit Testing Guidelines](https://mobiquity.jira.com/wiki/spaces/MW/pages/21201492/General+Unit+Testing+Guidelines).
 
 ## Formatting
 Formatting is handled by [`prettier`](https://github.com/prettier/prettier).
